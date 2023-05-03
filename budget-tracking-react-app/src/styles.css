@@ -1,0 +1,27 @@
+body {
+  background-color: #e6e6fa; /* светло-фиолетовый цвет */
+  color: #000; /* черный цвет текста */
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  color: #000; /* черный цвет заголовков */
+}
+
+/* Дополнительные стили для компонентов */
+.container {
+  padding: 20px;
+}
+
+.form-label {
+  display: block;
+  margin: 10px 0;
+}
+
+.form-input,
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+}
