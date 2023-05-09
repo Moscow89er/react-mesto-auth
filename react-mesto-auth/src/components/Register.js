@@ -2,26 +2,26 @@ import { Link } from "react-router-dom";
 
 function Register () {
     return (
-        <section className="register">
-            <h1 className="register__title">Регистрация</h1>
-            <form className="register__form">
+        <section className="form form-register">
+            <h1 className="form__title form__title-register">Регистрация</h1>
+            <form className="form__type__form">
                 <input
                     type="text"
                     placeholder="Email"
-                    className="register__input register__input__type_email"
+                    className="form__input form__input-register"
                 />
                 <input
                     type="password"
                     placeholder="Пароль"
-                    className="register__input register__input__type_password"
+                    className="form__input form__input-register"
                 />
                 <button 
                     type="submit"
-                    className="register__submit-button"
+                    className="form__submit-button form__submit-button-register"
                     >Зарегистрироваться
                 </button>
             </form>
-            <Link to="" className="register__link">Уже зарегистрированы? Войти</Link>
+            <Link to="" className="form__link form__link-register">Уже зарегистрированы? Войти</Link>
         </section>
     )
 }

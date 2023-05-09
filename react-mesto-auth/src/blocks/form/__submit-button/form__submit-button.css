@@ -1,4 +1,4 @@
-.register__submit-button {
+.form__submit-button {
     width: 358px;
     height: 50px;
     margin: 188px auto 15px;
@@ -11,13 +11,13 @@
     text-align: center;
     border: none;
 }
-.register__submit-button:hover {
+.form__submit-button:hover {
     transition: 1s linear 0.05s;
     background: rgba(255, 255, 255, 0.8);
     cursor: pointer;
 }
 @media (max-width: 696px) {
-    .register__submit-button {
+    .form__submit-button {
         margin: 143px 22px 20px;
         width: 260px;
         height: 46px;

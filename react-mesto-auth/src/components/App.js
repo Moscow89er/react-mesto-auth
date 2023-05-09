@@ -11,6 +11,7 @@ import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import ConfirmButtonPopup from './ConfirmButtonPopup.js';
 import Register from './Register.js';
+import Login from './Login.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -173,6 +174,7 @@ function App() {
               onDeleteButtonClick={handleDeleteButtonClick}
             />} />
           <Route path="/sign-up" element={<Register />} />
+          <Route path="//sign-in" element={<Login />} />
         </Routes>
         <Footer />
         <EditProfilePopup

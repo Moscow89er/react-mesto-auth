@@ -1,4 +1,4 @@
-.register__title {
+.form__title {
     max-width: 358px;
     margin: 60px auto 50px;
     font-weight: 900;
@@ -6,7 +6,7 @@
     line-height: 29px;
 }
 @media (max-width: 696px) {
-    .register__title {
+    .form__title {
         margin: 40px auto;
         max-width: 260px;
         font-size: 18px;
