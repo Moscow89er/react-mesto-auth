@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Login () {
     return (
         <section className="form form-login">
@@ -13,11 +15,11 @@ function Login () {
                     placeholder="Пароль"
                     className="form__input form__input-login"
                 />
-                <button 
-                    type="submit"
+                <Link
+                    to="/"
                     className="form__submit-button form__submit-button-login"
                     >Войти
-                </button>
+                </Link>
             </form>
         </section>
     )

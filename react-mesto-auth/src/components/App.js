@@ -12,6 +12,7 @@ import AddPlacePopup from './AddPlacePopup.js';
 import ConfirmButtonPopup from './ConfirmButtonPopup.js';
 import Register from './Register.js';
 import Login from './Login.js';
+import ProtectedRoute from './ProtectedRoute.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -23,6 +24,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   function handleCardClick(card) {
     if(!isConfirmButtonPopupOpen) {
@@ -162,19 +164,29 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <Routes>
-          <Route path="/" element={
-            <Main
-              cards={cards}
-              card={selectedCard}
-              onEditAvatar={handleEditAvatarClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditProfile={handleEditProfileClick}
-              onCardClick={handleCardClick}
-              handleCardLike={handleCardLike}
-              onDeleteButtonClick={handleDeleteButtonClick}
-            />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                render={(props) =>
+                  <Main
+                    cards={cards}
+                    card={selectedCard}
+                    onEditAvatar={handleEditAvatarClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditProfile={handleEditProfileClick}
+                    onCardClick={handleCardClick}
+                    handleCardLike={handleCardLike}
+                    onDeleteButtonClick={handleDeleteButtonClick}
+                    {...props}
+                  />
+                }
+              />
+            }
+          />
           <Route path="/sign-up" element={<Register />} />
-          <Route path="//sign-in" element={<Login />} />
+          <Route path="/sign-in" element={<Login />} />
         </Routes>
         <Footer />
         <EditProfilePopup

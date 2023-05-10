@@ -6,7 +6,7 @@ function Header() {
         <header className="header">
             <img className="header__logo" src={headerLogo} alt="логотип место"/>
             <p className="header__email">nickthegreat@ya.ru</p>
-            <Link to="" className="header__link">Выйти</Link>
+            <Link to="/sign-in" className="header__link">Выйти</Link>
         </header>
     );
 }
