@@ -21,7 +21,7 @@ function Register () {
                     >Зарегистрироваться
                 </button>
             </form>
-            <Link to="" className="form__link form__link-register">Уже зарегистрированы? Войти</Link>
+            <Link to="/sign-in" className="form__link form__link-register">Уже зарегистрированы? Войти</Link>
         </section>
     )
 }
