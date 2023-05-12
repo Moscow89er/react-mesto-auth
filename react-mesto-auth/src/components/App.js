@@ -21,12 +21,20 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isConfirmButtonPopupOpen, setIsConfirmButtonPopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  //const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+
+  /*function componentDidMount() {
+
+  };*/
+
+  function handleLogin () {
+    setLoggedIn(true);
+  }
 
   function handleCardClick(card) {
     if(!isConfirmButtonPopupOpen) {
@@ -188,7 +196,7 @@ function App() {
             }
           />
           <Route path="/sign-up" element={<Register />} />
-          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
         </Routes>
         <Footer />
         <EditProfilePopup

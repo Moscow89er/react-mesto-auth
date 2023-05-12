@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import * as auth from '../utils/auth.js';
 
-function Register ({ setIsInfoTooltipOpen }) {
+function Register () {
     const [formValue, setFormValue] = useState({
-        email: '',
-        password: ''
+        password: '',
+        email: ''
     })
 
     const navigate = useNavigate();
@@ -21,16 +21,12 @@ function Register ({ setIsInfoTooltipOpen }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        const { password, email } = formValue;
-        setIsInfoTooltipOpen(true);
+        const {password, email} = formValue;
         auth.register(password, email)
             .then(() => {
                 navigate('/sign-in', {replace: true});
             })
-            .catch((err) => console.log(err))
-            .finally(() => {
-                setIsInfoTooltipOpen(false);
-            });
+            .catch((err) => console.log(err));
     }
 
     return (
