@@ -35,6 +35,12 @@ function App() {
 
   };*/
 
+  function signOut() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    navigate('/sign-in');
+  };
+
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -49,12 +55,21 @@ function App() {
             setEmail(res.data.email);
             navigate('/', {replace: true});
           }
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   function handleLogin() {
     setLoggedIn(true);
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.checkToken(token)
+        .then((res) => {
+          setEmail(res.data.email);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   function handleCardClick(card) {
@@ -193,7 +208,7 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn} email={email} />
+        <Header loggedIn={loggedIn} email={email} onSignOut={signOut} />
         <Routes>
           <Route
             path="/"
@@ -217,7 +232,7 @@ function App() {
             }
           />
           <Route path="/sign-up" element={<Register />} />
-          <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/sign-in" element={<Login  handleLogin={handleLogin} />} />
         </Routes>
         <Footer />
         <EditProfilePopup

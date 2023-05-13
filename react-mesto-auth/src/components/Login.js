@@ -30,6 +30,7 @@ function Login ({ handleLogin }) {
                 if (data.token) {
                     setFormValue({password:'', email: ''});
                     handleLogin();
+                    //setEmail(res.data.email);
                     navigate('/', {replace: true});
                 }
             })
