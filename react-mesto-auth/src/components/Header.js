@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import headerLogo from '../images/header_logo.svg';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, email }) {
     const location = useLocation();
 
     return (
@@ -10,7 +10,7 @@ function Header({ loggedIn }) {
             <img className="header__logo" src={headerLogo} alt="логотип место"/>
             {
                 loggedIn ? 
-                <p className="header__email">nickthegreat@ya.ru</p> :
+                <p className="header__email">{email}</p> :
                 null
             }
             {

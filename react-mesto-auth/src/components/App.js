@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -14,6 +14,7 @@ import Register from './Register.js';
 import Login from './Login.js';
 import ProtectedRoute from './ProtectedRoute.js';
 import InfoTooltip from './InfoTooltip.js';
+import * as auth from '../utils/auth.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -27,14 +28,34 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   /*function componentDidMount() {
 
   };*/
 
-  function handleLogin () {
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.checkToken(token)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setEmail(res.data.email);
+            navigate('/', {replace: true});
+          }
+        });
+    }
+  };
+
+  function handleLogin() {
     setLoggedIn(true);
-  }
+  };
 
   function handleCardClick(card) {
     if(!isConfirmButtonPopupOpen) {
@@ -172,7 +193,7 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header loggedIn={loggedIn} />
+        <Header loggedIn={loggedIn} email={email} />
         <Routes>
           <Route
             path="/"
