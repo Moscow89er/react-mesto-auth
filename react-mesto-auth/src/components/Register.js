@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import * as auth from '../utils/auth.js';
 
-function Register () {
+function Register ({ openInfoTooltip, onError }) {
     const [formValue, setFormValue] = useState({
         password: '',
         email: ''
@@ -24,9 +24,15 @@ function Register () {
         const {password, email} = formValue;
         auth.register(password, email)
             .then(() => {
+                onError(false);
+                openInfoTooltip(true);
                 navigate('/sign-in', {replace: true});
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                onError(true);
+                openInfoTooltip(true);
+                console.log(err);
+            });
     }
 
     return (

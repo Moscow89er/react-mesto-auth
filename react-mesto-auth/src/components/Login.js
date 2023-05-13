@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import * as auth from '../utils/auth.js';
 
-function Login ({ handleLogin }) {
+function Login ({ handleLogin, openInfoTooltip, onError }) {
     const [formValue, setFormValue] = useState({
         password: '',
         email: ''
@@ -30,11 +30,14 @@ function Login ({ handleLogin }) {
                 if (data.token) {
                     setFormValue({password:'', email: ''});
                     handleLogin();
-                    //setEmail(res.data.email);
                     navigate('/', {replace: true});
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                onError(true);
+                openInfoTooltip(true);
+                console.log(err);
+            });
     }
 
     return (

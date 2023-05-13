@@ -22,28 +22,25 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isConfirmButtonPopupOpen, setIsConfirmButtonPopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-  //const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  /*function componentDidMount() {
-
-  };*/
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   function signOut() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     navigate('/sign-in');
   };
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
@@ -164,6 +161,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsConfirmButtonPopupOpen(false);
     setIsImagePopupOpen(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard(null);
   };
 
@@ -231,8 +229,8 @@ function App() {
               />
             }
           />
-          <Route path="/sign-up" element={<Register />} />
-          <Route path="/sign-in" element={<Login  handleLogin={handleLogin} />} />
+          <Route path="/sign-up" element={<Register openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} />} />
+          <Route path="/sign-in" element={<Login openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} handleLogin={handleLogin} />} />
         </Routes>
         <Footer />
         <EditProfilePopup
@@ -254,7 +252,9 @@ function App() {
           isLoading={isLoading}
         />
         <InfoTooltip
-          
+          isOpen={isInfoTooltipOpen}
+          isError={isError}
+          onClose={closeAllPopups}
         />
         {selectedCard && 
           <ConfirmButtonPopup
