@@ -212,20 +212,16 @@ function App() {
             path="/"
             element={
               <ProtectedRoute
+                element={Main}
                 loggedIn={loggedIn}
-                render={(props) =>
-                  <Main
-                    cards={cards}
-                    card={selectedCard}
-                    onEditAvatar={handleEditAvatarClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditProfile={handleEditProfileClick}
-                    onCardClick={handleCardClick}
-                    handleCardLike={handleCardLike}
-                    onDeleteButtonClick={handleDeleteButtonClick}
-                    {...props}
-                  />
-                }
+                cards={cards}
+                card={selectedCard}
+                onEditAvatar={handleEditAvatarClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditProfile={handleEditProfileClick}
+                onCardClick={handleCardClick}
+                handleCardLike={handleCardLike}
+                onDeleteButtonClick={handleDeleteButtonClick}
               />
             }
           />
