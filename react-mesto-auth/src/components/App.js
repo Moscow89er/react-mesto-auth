@@ -230,7 +230,7 @@ function App() {
             }
           />
           <Route path="/sign-up" element={<Register openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} />} />
-          <Route path="/sign-in" element={<Login openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} handleLogin={handleLogin} />} />
+          <Route path="/sign-in" element={<Login openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} onLoggedIn={handleLogin} />} />
         </Routes>
         <Footer />
         <EditProfilePopup

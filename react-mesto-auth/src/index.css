@@ -52,4 +52,7 @@
 @import url(./blocks/form/__title/form__title.css);
 @import url(./blocks/popup/__icon/popup__icon.css);
 @import url(./blocks/popup/__title/popup__title-tooltip.css);
-@import url(./blocks/popup/__container/popup__container-tooltip.css)
+@import url(./blocks/popup/__container/popup__container-tooltip.css);
+@import url(./blocks/header/__burger-menu/header__burger-menu.css);
+@import url(./blocks/header/__nav-links/header__nav-links.css);
+@import url(./blocks/header/__group/header__group.css);
