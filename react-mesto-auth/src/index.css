@@ -56,3 +56,6 @@
 @import url(./blocks/header/__burger-menu/header__burger-menu.css);
 @import url(./blocks/header/__nav-links/header__nav-links.css);
 @import url(./blocks/header/__group/header__group.css);
+@import url(./blocks/form/__error/form__error.css);
+@import url(./blocks/form/__inputs/form__inputs.css);
+@import url(./blocks/form/__submit-button/form__submit-button.css);

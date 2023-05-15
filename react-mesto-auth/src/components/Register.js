@@ -4,7 +4,7 @@ import * as auth from '../utils/auth.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
 function Register ({ openInfoTooltip, onError }) {
-    const { formValues, handleInputChange } = useFormValidator();
+    const { formValues, formErrors, isValid, handleInputChange } = useFormValidator();
 
     const navigate = useNavigate();
 
@@ -27,28 +27,35 @@ function Register ({ openInfoTooltip, onError }) {
     return (
         <section className="form form-register">
             <h1 className="form__title form__title-register">Регистрация</h1>
-            <form onSubmit={handleSubmit} className="form__type__form">
-                <input
-                    value={formValues.email}
-                    onChange={handleInputChange}
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    className="form__input form__input-register"
-                    required
-                />
-                <input
-                    value={formValues.password}
-                    onChange={handleInputChange}
-                    type="password"
-                    name="password"
-                    placeholder="Пароль"
-                    className="form__input form__input-register"
-                    required
-                />
-                <button 
+            <form onSubmit={handleSubmit} noValidate className="form__type-form">
+                <div className="form__inputs">
+                    <input
+                        value={formValues.email}
+                        onChange={handleInputChange}
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        className="form__input form__input-register"
+                        required
+                    />
+                    {!isValid && formValues.email && <div className="form__error form__error-email">{formErrors.email}</div>}
+                    <input
+                        value={formValues.password}
+                        onChange={handleInputChange}
+                        type="password"
+                        name="password"
+                        placeholder="Пароль"
+                        className="form__input form__input-register"
+                        minLength="4"
+                        maxLength="20"
+                        required
+                    />
+                    {!isValid && formValues.password && <div className="form__error form__error-password">{formErrors.password}</div>}
+                </div>
+                <button
+                    disabled={!isValid}
                     type="submit"
-                    className="form__submit-button form__submit-button-register"
+                    className={`${!isValid ? "form__submit-button_disabled" : "form__submit-button"}`}
                     >Зарегистрироваться
                 </button>
             </form>

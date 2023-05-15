@@ -1,0 +1,25 @@
+.form__error {
+    display: block;
+    width: 356px;
+    margin: -30px auto 0;
+    
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    border: none;
+    color: #FF0000;
+    background-color: transparent;
+    outline: none;
+    z-index: 2;
+}
+.form__error_active {
+    display: inline;
+}
+@media (max-width: 696px) {
+    .form__error {
+        
+        font-size: 9px;
+        line-height: 12px;
+        width: 240px;
+    }
+}
