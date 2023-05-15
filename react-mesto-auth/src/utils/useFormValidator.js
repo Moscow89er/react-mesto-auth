@@ -18,7 +18,7 @@ function useFormValidator () {
         setIsValid(false);
     }, [setFormValues, setFormErrors, setIsValid]);
 
-    return { formValues, formErrors, isValid, handleInputChange, resetForm };
+    return { formValues, formErrors, isValid, handleInputChange, resetForm, setFormValues };
 }
 
 export default useFormValidator;

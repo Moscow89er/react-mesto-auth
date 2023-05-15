@@ -1,37 +1,30 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import PopupWithForm from './PopupWithForm.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    
     const currentUser = useContext(CurrentUserContext);
-    const { formValues, formErrors, isValid, handleInputChange, resetForm } = useFormValidator(); 
+    const { formValues, formErrors, isValid, handleInputChange, resetForm, setFormValues } = useFormValidator(); 
 
     useEffect(() => {
         if (!isOpen) {
             resetForm();
+        } else {
+            setFormValues({
+                username: currentUser.name,
+                about: currentUser.about
+            });
         }
-
-        setName(currentUser.name);
-        setDescription(currentUser.about);
-    }, [currentUser, isOpen]);
-
-    function handleNameChange(evt) {
-        setName(evt.target.value);
-    };
-
-    function handleDescriptionChange(evt) {
-        setDescription(evt.target.value);
-    };
+    }, [currentUser, isOpen, resetForm, setFormValues]);
 
     function handleSubmit(evt) {
         evt.preventDefault();
       
         onUpdateUser({
-          name,
-          about: description,
+          name: formValues.username,
+          about: formValues.about
         });
     };
 
@@ -48,11 +41,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
             buttonLoadingText="Сохранение..."
         >
             <input
-                onChange={(evt) => {
-                    handleNameChange(evt);
-                    handleInputChange(evt);
-                }}
-                value={name || ''}
+                onChange={handleInputChange}
+                value={formValues.username || ''}
                 id="username"
                 type="text"
                 name="username"
@@ -64,11 +54,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
             />
             {!isValid && formValues.username && <div className="popup__form-error-username">{formErrors.username}</div>}
             <input
-                onChange={(evt) => {
-                    handleDescriptionChange(evt);
-                    handleInputChange(evt);
-                }}
-                value={description || ''}
+                onChange={handleInputChange}
+                value={formValues.about || ''}
                 id="about"
                 type="text"
                 name="about"

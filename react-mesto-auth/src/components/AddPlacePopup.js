@@ -1,18 +1,16 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import PopupWithForm from './PopupWithForm.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
-    const cardnameRef = useRef('');
-    const cardlinkRef = useRef('');
     const { formValues, formErrors, isValid, handleInputChange, resetForm } = useFormValidator(); 
 
     function handleSubmit(evt) {
         evt.preventDefault();
 
         onAddPlace({
-            name: cardnameRef.current.value,
-            link: cardlinkRef.current.value
+            name: formValues.cardname,
+            link: formValues.cardlink
         });
     };
 
@@ -21,8 +19,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
             resetForm();
         }
 
-        cardnameRef.current.value = '';
-        cardlinkRef.current.value = '';
     }, [isOpen, resetForm]);
 
     return (
@@ -38,11 +34,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
             isFormValid={isValid}
         >
             <input
-                ref={cardnameRef}
                 id="cardname"
                 type="text"
                 name="cardname"
                 onChange={handleInputChange}
+                value={formValues.cardname || ''}
                 placeholder="Название"
                 className="popup__input popup__input_type_cardname"
                 minLength={2}
@@ -51,11 +47,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
             />
             {!isValid && formValues.cardname && <div className="popup__form-error-cardname">{formErrors.cardname}</div>}
             <input
-                ref={cardlinkRef}
                 id="cardlink"
                 type="url"
                 name="cardlink"
                 onChange={handleInputChange}
+                value={formValues.cardlink || ''}
                 placeholder="Ссылка на картинку"
                 className="popup__input popup__input_type_cardlink"
                 required
