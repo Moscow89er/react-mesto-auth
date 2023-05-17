@@ -1,4 +1,19 @@
+import { useEffect } from "react";
+
 function PopupWithForm({ name, title, isFormValid, isOpen, isLoading, onClose, buttonText, children, handleSubmit, buttonLoadingText }) {
+    useEffect(() => {
+        if (!isOpen) return;
+
+        function handleESC(evt) {
+            if (evt.key === "Escape") {
+                onClose();
+            }
+        }
+        document.addEventListener("keydown", handleESC);
+
+        return () => document.removeEventListener("keydown", handleESC)
+    }, [isOpen, onClose]);
+
     return (
         <section className={`popup popup-${name} ${isOpen ? "popup_opened" : ""}`}>
             <div className={`popup__container popup__container-${name}`}>

@@ -166,23 +166,15 @@ function App() {
   };
 
   useEffect(() => {
-    const handleEscClose = (evt) => {
-      if (evt.key === 'Escape') {
-        closeAllPopups();
-      }
-    };
-
     const handleOutsidePopupClick = (evt) => {
       if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
         closeAllPopups();
       }
     };
 
-    window.addEventListener('keydown', handleEscClose);
     window.addEventListener('click', handleOutsidePopupClick);
 
     return () => {
-      window.removeEventListener('keydown', handleEscClose);
       window.removeEventListener('click', handleOutsidePopupClick);
     };
   }, []);

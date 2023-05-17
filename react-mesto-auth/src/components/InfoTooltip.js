@@ -1,7 +1,21 @@
+import { useEffect } from 'react';
 import onSucces from '../images/on_succes.png';
 import onError from '../images/on_error.png';
 
-function InfoTooltip ({ isOpen, isError }) {
+function InfoTooltip ({ isOpen, onClose, isError }) {
+    useEffect(() => {
+        if (!isOpen) return;
+
+        function handleESC(evt) {
+            if (evt.key === "Escape") {
+                onClose();
+            }
+        }
+        document.addEventListener("keydown", handleESC);
+
+        return () => document.removeEventListener("keydown", handleESC)
+    }, [isOpen, onClose]);
+
     return (
         <section className={`popup popup__tooltip ${isOpen ? "popup_opened" : ""}`}>
             <div className="popup__container popup__container-tooltip">
