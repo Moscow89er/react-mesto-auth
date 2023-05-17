@@ -32,8 +32,32 @@ function App() {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect((evt) => {
+    const handleOutsidePopupClick = (evt) => {
+      if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
+        closeAllPopups();
+      }
+    };
+
     tokenCheck();
+
+    api.getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => console.log(err));
+      
+    api.getInitialCards()
+      .then((cards) => {
+        setCards(cards);
+      })
+      .catch((err) => console.log(err));
+
+    window.addEventListener('click', handleOutsidePopupClick);
+
+    return () => {
+      window.removeEventListener('click', handleOutsidePopupClick);
+    };
   }, []);
 
   function signOut() {
@@ -164,36 +188,6 @@ function App() {
     setIsInfoTooltipOpen(false);
     setSelectedCard(null);
   };
-
-  useEffect(() => {
-    const handleOutsidePopupClick = (evt) => {
-      if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
-        closeAllPopups();
-      }
-    };
-
-    window.addEventListener('click', handleOutsidePopupClick);
-
-    return () => {
-      window.removeEventListener('click', handleOutsidePopupClick);
-    };
-  }, []);
-
-  useEffect(() => {
-    api.getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    api.getInitialCards()
-      .then((cards) => {
-        setCards(cards);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <div>
