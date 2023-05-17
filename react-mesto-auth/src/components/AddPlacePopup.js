@@ -3,7 +3,7 @@ import PopupWithForm from './PopupWithForm.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
-    const { formValues, formErrors, isValid, handleInputChange, resetForm } = useFormValidator(); 
+    const { formValues, formErrors, isValid, handleInputChange, resetForm } = useFormValidator({name: '', link: ''}); 
 
     function handleSubmit(evt) {
         evt.preventDefault();

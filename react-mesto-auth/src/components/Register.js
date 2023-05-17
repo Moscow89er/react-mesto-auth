@@ -4,7 +4,7 @@ import * as auth from '../utils/auth.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
 function Register ({ openInfoTooltip, onError }) {
-    const { formValues, formErrors, isValid, handleInputChange } = useFormValidator();
+    const { formValues, formErrors, isValid, handleInputChange } = useFormValidator({password: '', email: ''});
 
     const navigate = useNavigate();
 
