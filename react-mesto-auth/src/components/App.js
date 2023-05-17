@@ -32,7 +32,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  useEffect((evt) => {
+  useEffect(() => {
     const handleOutsidePopupClick = (evt) => {
       if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
         closeAllPopups();
@@ -41,24 +41,26 @@ function App() {
 
     tokenCheck();
 
-    api.getUserInfo()
+    if (loggedIn) {
+      api.getUserInfo()
       .then((data) => {
         setCurrentUser(data);
       })
       .catch((err) => console.log(err));
-      
+
     api.getInitialCards()
       .then((cards) => {
         setCards(cards);
       })
       .catch((err) => console.log(err));
+    }
 
     window.addEventListener('click', handleOutsidePopupClick);
 
     return () => {
       window.removeEventListener('click', handleOutsidePopupClick);
     };
-  }, []);
+  }, [loggedIn]);
 
   function signOut() {
     localStorage.removeItem('token');
@@ -237,6 +239,9 @@ function App() {
           isOpen={isInfoTooltipOpen}
           isError={isError}
           onClose={closeAllPopups}
+          tooltipConfirm="Вы успешно зарегистрировались!"
+          tooltipError="Что-то пошло не так!
+          Попробуйте ещё раз."
         />
         {selectedCard && 
           <ConfirmButtonPopup

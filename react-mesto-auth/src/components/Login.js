@@ -11,9 +11,6 @@ function Login ({ onLoggedIn, openInfoTooltip, onError }) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        if (!formValues.password || !formValues.email) {
-            return;
-        }
         auth.authorize(formValues.password, formValues.email)
             .then((data) => {
                 if (data.token) {

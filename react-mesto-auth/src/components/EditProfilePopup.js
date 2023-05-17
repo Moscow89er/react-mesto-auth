@@ -4,7 +4,6 @@ import PopupWithForm from './PopupWithForm.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
-    
     const currentUser = useContext(CurrentUserContext);
     const { formValues, formErrors, isValid, handleInputChange, resetForm, setFormValues } = useFormValidator({username: '', about: ''}); 
 

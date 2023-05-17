@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 function useFormValidator (initialState) {
     const [formValues, setFormValues] = useState(initialState);
     const [formErrors, setFormErrors] = useState({});
-    const [isValid, setIsValid] = useState(true);
+    const [isValid, setIsValid] = useState(false);
 
     const handleInputChange = (evt) => {
         const  { name, value } = evt.target;

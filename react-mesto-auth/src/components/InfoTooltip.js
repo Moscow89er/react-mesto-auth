@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import onSucces from '../images/on_succes.png';
 import onError from '../images/on_error.png';
 
-function InfoTooltip ({ isOpen, onClose, isError }) {
+function InfoTooltip ({ isOpen, onClose, isError, tooltipConfirm, tooltipError }) {
     useEffect(() => {
         if (!isOpen) return;
 
@@ -20,8 +20,7 @@ function InfoTooltip ({ isOpen, onClose, isError }) {
         <section className={`popup popup__tooltip ${isOpen ? "popup_opened" : ""}`}>
             <div className="popup__container popup__container-tooltip">
                 <img src={isError ? onError : onSucces} className="popup__icon"></img>
-                <h2 className="popup__title popup__title-tooltip">{isError ? `Что-то пошло не так!
-Попробуйте ещё раз.` : `Вы успешно зарегистрировались!`}</h2>
+                <h2 className="popup__title popup__title-tooltip">{isError ? tooltipError : tooltipConfirm}</h2>
                 <button type="button" className="popup__close-button"></button>
             </div>
         </section>
