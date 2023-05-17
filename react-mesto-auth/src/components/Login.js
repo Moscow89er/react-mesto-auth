@@ -1,29 +1,17 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
-import * as auth from '../utils/auth.js';
 import useFormValidator from '../utils/useFormValidator.js';
 
-function Login ({ onLoggedIn, openInfoTooltip, onError }) {
+function Login ({ onLogin }) {
     const { formValues, formErrors, isValid, handleInputChange, setFormValues } = useFormValidator({password: '', email: ''});
     
-    const navigate = useNavigate();
-
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        auth.authorize(formValues.password, formValues.email)
-            .then((data) => {
-                if (data.token) {
-                    setFormValues({password:'', email: ''});
-                    onLoggedIn();
-                    navigate('/', {replace: true});
-                }
+        onLogin(formValues.password, formValues.email)
+            .then(() => {
+                setFormValues({password:'', email: ''});
             })
-            .catch((err) => {
-                onError(true);
-                openInfoTooltip(true);
-                console.log(err);
-            });
+            .catch((err) => console.log(err));
     }
 
     return (

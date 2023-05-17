@@ -83,16 +83,34 @@ function App() {
     }
   };
 
-  function handleLogin() {
-    setLoggedIn(true);
-    const token = localStorage.getItem('token');
-    if (token) {
-      auth.checkToken(token)
-        .then((res) => {
-          setEmail(res.data.email);
-        })
-        .catch((err) => console.log(err));
-    }
+  function handleLogin(password, email) {
+    return auth.authorize(password, email)
+      .then((data) => {
+        if (data.token) {
+          setLoggedIn(true);
+          setEmail(data.email);
+          navigate('/', {replace: true});
+        }
+      })
+      .catch((err) => {
+        setIsError(true);
+        setIsInfoTooltipOpen(true);
+        console.log(err);
+      });
+  };
+
+  function handleRegister(password, email) {
+    return auth.register(password, email)
+      .then(() => {
+        setIsError(false);
+        setIsInfoTooltipOpen(true);
+        navigate('/sign-in', {replace: true});
+      })
+      .catch((err) => {
+        setIsError(true);
+        setIsInfoTooltipOpen(true);
+        console.log(err);
+      });
   };
 
   function handleCardClick(card) {
@@ -213,8 +231,8 @@ function App() {
               />
             }
           />
-          <Route path="/sign-up" element={<Register openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} />} />
-          <Route path="/sign-in" element={<Login openInfoTooltip={setIsInfoTooltipOpen} onError={setIsError} onLoggedIn={handleLogin} />} />
+          <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
+          <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
         </Routes>
         <Footer />
         <EditProfilePopup
