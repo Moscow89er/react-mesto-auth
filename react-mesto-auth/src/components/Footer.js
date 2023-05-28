@@ -1,7 +1,9 @@
 function Footer() {
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="footer">
-            <p className="footer__copyright">© 2022 Никита Хубаев</p>
+            <p className="footer__copyright">© {currentYear} Никита Хубаев</p>
         </footer>
     );
 }
